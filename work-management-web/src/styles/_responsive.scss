@@ -1,0 +1,14 @@
+//_responsive.scss
+@use 'mixins' as *;
+
+.sidebar {
+  @include mobile {
+    width: 70px;
+  }
+}
+
+.content {
+  @include mobile {
+    padding: 12px;
+  }
+}
