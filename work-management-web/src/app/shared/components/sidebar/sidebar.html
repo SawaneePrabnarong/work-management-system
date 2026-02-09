@@ -1,0 +1,55 @@
+<aside class="app-sidebar">
+  <!-- HEADER -->
+  <div class="sidebar__header">
+    <div class="sidebar__title" routerLink="/dashboard">Work Management</div>
+  </div>
+  <!-- TOP -->
+  <div class="sidebar__top">
+    <nav class="menu">
+      @for (item of menus; track item.label) {
+        <!-- เมนูที่มี children -->
+        @if (item.children?.length) {
+          <div class="menu-group">
+            <button class="menu-item menu-parent" type="button" (click)="toggleMenu(item)">
+              <i class="{{ item.icon }}"></i>
+              <span>{{ item.label }}</span>
+
+              <i class="pi pi-chevron-down chevron" [class.rotate]="isExpanded(item)"></i>
+            </button>
+
+            @if (isExpanded(item)) {
+              <div class="submenu">
+                @for (child of item.children; track child.label) {
+                  <a
+                    class="menu-item menu-child"
+                    [routerLink]="child.route"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    (click)="onMenuClick()"
+                  >
+                    <i class="{{ child.icon }}"></i>
+                    <span>{{ child.label }}</span>
+                  </a>
+                }
+              </div>
+            }
+          </div>
+        }
+
+        <!-- เมนูปกติ -->
+        @else {
+          <a
+            class="menu-item"
+            [routerLink]="item.route"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="onMenuClick()"
+          >
+            <i class="{{ item.icon }}"></i>
+            <span>{{ item.label }}</span>
+          </a>
+        }
+      }
+    </nav>
+  </div>
+</aside>

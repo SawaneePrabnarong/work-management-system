@@ -1,18 +1,20 @@
-import { Component, signal } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { ErrorCode, ErrorCodeKey } from '../../shared/enums/error-code.enum';
+import { PopupService } from '../../services/popup.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [FormsModule, CommonModule],
-  templateUrl: './login.html',
-  styleUrl: './login.scss',
+  templateUrl: './register.html',
+  styleUrl: './register.scss',
 })
-export class Login {
+export class Register {
+  username = '';
   email = '';
   password = '';
   errorMessage = signal('');
@@ -20,19 +22,25 @@ export class Login {
   constructor(
     private auth: AuthService,
     private router: Router,
+    private popup: PopupService,
   ) {}
 
-  login() {
-    this.errorMessage.set('');
-
+  register() {
     this.auth
-      .login({
+      .register({
+        username: this.username,
         email: this.email,
         password: this.password,
       })
       .subscribe({
         next: () => {
-          this.router.navigate(['/dashboard']);
+          this.popup.show(
+            'Creation successful!',
+            'You have been successfully created.',
+            () => {
+              this.router.navigate(['/auth/login']);
+            },
+          );
         },
         error: (err) => {
           const code = err?.error?.code as ErrorCodeKey;
@@ -40,9 +48,5 @@ export class Login {
           this.errorMessage.set(ErrorCode[code] ?? 'An error occurred. Please try again.');
         },
       });
-  }
-
-  goToRegister() {
-    this.router.navigate(['/auth/register']);
   }
 }

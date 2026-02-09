@@ -6,8 +6,6 @@
 
 .sidebar {
   width: 240px;
-  background: #111827;
-  color: white;
 }
 
 .main-section {
@@ -20,9 +18,55 @@
   height: 60px;
   background: white;
   border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
 }
 
 .content {
   flex: 1;
   padding: 20px;
+  background: #f5f7fb;
+}
+
+/* default: desktop ซ่อน hamburger */
+.menu-toggle {
+  display: none;
+}
+
+/* ---------- Tablet + Mobile ---------- */
+@media (max-width: 1024px) {
+  .app-layout {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -240px;
+    top: 0;
+    height: 100vh;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    background: white;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .menu-toggle {
+    display: inline-block;
+    margin: 0 12px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* overlay */
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 900;
+  }
 }

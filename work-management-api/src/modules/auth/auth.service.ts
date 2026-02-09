@@ -8,6 +8,7 @@ import { LoginDto } from './dto/login.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from '../users/dto/create-user.dto';
+import { ErrorCode } from 'src/common/error-codes';
 
 @Injectable()
 export class AuthService {
@@ -20,7 +21,9 @@ export class AuthService {
     const existingUser = await this.usersService.findByEmail(dto.email);
 
     if (existingUser) {
-      throw new BadRequestException('Email already exists');
+      throw new BadRequestException({
+        code: ErrorCode.EMAIL_ALREADY_EXISTS,
+      });
     }
 
     return this.usersService.createUser(dto);
@@ -30,13 +33,17 @@ export class AuthService {
     const user = await this.usersService.findByEmail(dto.email);
 
     if (!user) {
-      throw new UnauthorizedException('Invalid email or password');
+      throw new UnauthorizedException({
+        code: ErrorCode.INVALID_CREDENTIALS,
+      });
     }
 
     const match = await bcrypt.compare(dto.password, user.password);
 
     if (!match) {
-      throw new UnauthorizedException('Invalid email or password');
+      throw new UnauthorizedException({
+        code: ErrorCode.INVALID_CREDENTIALS,
+      });
     }
 
     const payload = { sub: user.id, email: user.email };

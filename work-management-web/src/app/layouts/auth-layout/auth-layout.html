@@ -1,3 +1,11 @@
 <div class="auth-container">
   <router-outlet></router-outlet>
 </div>
+
+@if (popup.visible()) {
+  <app-popup
+    [title]="popup.title()"
+    [message]="popup.message()"
+    [onConfirm]="popup.close.bind(popup)"
+  />
+}

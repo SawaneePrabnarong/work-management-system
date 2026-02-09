@@ -2,15 +2,19 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
 
   {
-    path: 'login',
+    path: 'auth',
     loadComponent: () => import('./layouts/auth-layout/auth-layout').then((m) => m.AuthLayout),
     children: [
       {
-        path: '',
+        path: 'login',
         loadComponent: () => import('./pages/login/login').then((m) => m.Login),
+      },
+      {
+        path: 'register',
+        loadComponent: () => import('./pages/register/register').then((m) => m.Register),
       },
     ],
   },
@@ -23,6 +27,14 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadComponent: () => import('./pages/dashboard/dashboard').then((m) => m.Dashboard),
+      },
+      {
+        path: 'projects',
+        loadComponent: () => import('./pages/projects/projects').then((m) => m.Projects),
+      },
+      {
+        path: 'tasks',
+        loadComponent: () => import('./pages/tasks/tasks').then((m) => m.Tasks),
       },
     ],
   },
