@@ -1,0 +1,16 @@
+<div class="header-left">
+  <button class="menu-toggle" (click)="toggleSidebar()">☰</button>
+</div>
+
+<div class="header-right">
+  <div class="profile" (click)="toggleProfileMenu($event)">
+    <div class="avatar">{{ userInitial }}</div>
+    <span class="username">{{ username }}</span>
+  </div>
+
+  @if (profileOpen) {
+    <div class="profile-dropdown">
+      <button (click)="logout()">Logout</button>
+    </div>
+  }
+</div>

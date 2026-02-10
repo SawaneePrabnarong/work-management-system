@@ -1,0 +1,78 @@
+:host {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 12px; /* สำคัญ */
+  box-sizing: border-box;
+}
+
+/* left */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* right */
+.header-right {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 48px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  min-width: 140px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.profile-dropdown button {
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.profile-dropdown button:hover {
+  background: #f3f4f6;
+}
+
+@media (max-width: 600px) {
+  .username {
+    display: none;
+  }
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+}
