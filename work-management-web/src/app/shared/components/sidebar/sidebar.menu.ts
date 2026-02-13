@@ -1,4 +1,4 @@
-import { SidebarMenu } from '../../../models/components/sidebar.model';
+import { SidebarMenu } from '../../../models/sidebar.model';
 
 export const SIDEBAR_MENU: SidebarMenu[] = [
   {

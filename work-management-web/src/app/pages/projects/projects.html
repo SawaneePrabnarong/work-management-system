@@ -1,1 +1,33 @@
-<p>projects works!</p>
+<div class="projects-page">
+  <div class="title-row">
+    <h3>My Projects</h3>
+    <button class="new-project-btn" (click)="openModal()">+ New Project</button>
+  </div>
+
+  <div class="projects-list">
+    @if (error) {
+      <p>Failed to load projects.</p>
+    } @else if (projects$ | async; as projects) {
+      @if (projects.length === 0) {
+        <p>No projects found.</p>
+      } @else {
+        @for (project of projects; track project.id) {
+          <div class="project-card">
+            <div class="project-info">
+              <h4>{{ project.name }}</h4>
+              <p>{{ project.description || 'No description' }}</p>
+              <small>Created: {{ project.createdAt | date }}</small>
+            </div>
+            <a class="open-btn" [routerLink]="['/projects', project.id]">Open →</a>
+          </div>
+        }
+      }
+    } @else {
+      <p>Loading projects...</p>
+    }
+  </div>
+
+  @if (showModal) {
+    <app-create-project-modal (close)="closeModal()" (create)="createProject($event)" />
+  }
+</div>

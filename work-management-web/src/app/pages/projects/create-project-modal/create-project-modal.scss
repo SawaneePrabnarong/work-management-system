@@ -1,0 +1,88 @@
+@use 'styles/variables' as var;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* modal box */
+.modal {
+  background: var.$color-white;
+  padding: 24px;
+  width: 420px;
+  border-radius: 10px;
+
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* title */
+.modal h3 {
+  margin: 0;
+  margin-bottom: 4px;
+}
+
+/* inputs */
+.modal input,
+.modal textarea {
+  width: 100%;
+  padding: 10px 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 6px;
+
+  font-size: 14px;
+  outline: none;
+}
+
+/* focus state */
+.modal input:focus,
+.modal textarea:focus {
+  border-color: var.$color-primary;
+}
+
+/* textarea height */
+.modal textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* button area */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* cancel button */
+.actions button:first-child {
+  background: #eee;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* create button */
+.actions button:last-child {
+  background: var.$color-primary;
+  color: var.$color-white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* hover */
+.actions button:hover {
+  opacity: 0.9;
+}

@@ -12,6 +12,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 
 .header {
@@ -24,12 +25,23 @@
   padding: 0 20px 0 0;
 }
 
+// ใน _layout.scss
 .content {
   flex: 1;
   padding: 20px;
   background: #f5f7fb;
+  position: relative;
 }
 
+.content-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  overflow: hidden;
+}
 /* default: desktop ซ่อน hamburger */
 .menu-toggle {
   display: none;
@@ -38,7 +50,7 @@
 /* ---------- Tablet + Mobile ---------- */
 @media (max-width: 1024px) {
   .app-layout {
-    display: block;
+    display: flex;
   }
 
   .sidebar {

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SIDEBAR_MENU } from './sidebar.menu';
-import { SidebarMenu } from '../../../models/components/sidebar.model';
+import { SidebarMenu } from '../../../models/sidebar.model';
 
 @Component({
   selector: 'app-sidebar',

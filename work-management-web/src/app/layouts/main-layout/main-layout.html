@@ -16,7 +16,17 @@
     </header>
 
     <main class="content">
-      <router-outlet></router-outlet>
+      <div class="content-inner">
+        <router-outlet></router-outlet>
+      </div>
     </main>
   </div>
 </div>
+
+@if (popup.visible()) {
+  <app-popup
+    [title]="popup.title()"
+    [message]="popup.message()"
+    [onConfirm]="popup.close.bind(popup)"
+  />
+}

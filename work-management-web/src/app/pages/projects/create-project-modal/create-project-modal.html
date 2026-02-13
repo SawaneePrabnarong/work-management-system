@@ -1,0 +1,14 @@
+<div class="overlay">
+  <div class="modal">
+    <h3>Create Project</h3>
+
+    <input placeholder="Project name" [(ngModel)]="name" />
+
+    <textarea placeholder="Description" [(ngModel)]="description"></textarea>
+
+    <div class="actions">
+      <button (click)="close.emit()">Cancel</button>
+      <button (click)="submit()">Create</button>
+    </div>
+  </div>
+</div>

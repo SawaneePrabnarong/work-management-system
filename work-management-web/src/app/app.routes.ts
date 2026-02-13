@@ -33,6 +33,11 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/projects/projects').then((m) => m.Projects),
       },
       {
+        path: 'projects/:id',
+        loadComponent: () =>
+          import('./pages/projects/project-detail/project-detail').then((m) => m.ProjectDetail),
+      },
+      {
         path: 'tasks',
         loadComponent: () => import('./pages/tasks/tasks').then((m) => m.Tasks),
       },

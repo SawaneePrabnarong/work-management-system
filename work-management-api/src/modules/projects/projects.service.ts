@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Project } from './entity/project.entity';
 import { Repository } from 'typeorm';
+import { ErrorCode } from 'src/common/error-codes';
 
 @Injectable()
 export class ProjectsService {
@@ -30,12 +31,18 @@ export class ProjectsService {
   }
 
   async findOne(projectId: number, userId: number) {
-    return this.projectRepo.findOne({
+    const project = await this.projectRepo.findOne({
       where: {
         id: projectId,
         ownerId: userId,
       },
     });
+
+    if (!project) {
+      throw new NotFoundException({ code: ErrorCode.PROJECT_NOT_FOUND });
+    }
+
+    return project;
   }
 
   async update(
@@ -48,7 +55,7 @@ export class ProjectsService {
     });
 
     if (!project) {
-      return null;
+      throw new NotFoundException({ code: ErrorCode.PROJECT_NOT_FOUND });
     }
 
     if (data.name !== undefined) {
@@ -66,9 +73,9 @@ export class ProjectsService {
     const project = await this.projectRepo.findOne({
       where: { id: projectId, ownerId: userId },
     });
-    
+
     if (!project) {
-      return null;
+      throw new NotFoundException({ code: ErrorCode.PROJECT_NOT_FOUND });
     }
 
     await this.projectRepo.remove(project);
